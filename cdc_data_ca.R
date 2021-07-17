@@ -21,6 +21,7 @@ library(patchwork)
 library(grid)      # for tableGrobs
 library(gridExtra) # for multiple plots
 library(ggthemes)  # for theme_clean
+library(gganimate)
 
 #library(plotly)
 #library(ggrepel)   # for label plots
@@ -157,9 +158,9 @@ cases1 <-
            ymin = -Inf, ymax = Inf, 
            fill = "yellow", alpha = 0.3) + 
   
-  geom_col(fill = "#bcbcbc") +
-  geom_line(aes(y = avg7_case), color = "blue", size = 2) +
-  geom_area(aes(y = avg7_case), fill = "blue", alpha = 0.2) +
+  geom_col(fill = "#D3AE7C") +
+  geom_line(aes(y = avg7_case), color = "#307CA1", size = 2) +
+  geom_area(aes(y = avg7_case), fill = "#307CA1", alpha = 0.2) +
   
   geom_vline(xintercept = ca_first_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_second_vax_immunity, color = "black", linetype = "dashed") +
@@ -202,9 +203,9 @@ cases2 <-
            ymin = -Inf, ymax = Inf, 
            fill = "red", alpha = 0.2) +
   
-  geom_col(fill = "#bcbcbc") +
-  geom_line(aes(y = avg7_case), color = "blue", size = 2) +
-  geom_area(aes(y = avg7_case), fill = "blue", alpha = 0.2) +
+  geom_col(fill = "#D3AE7C") +
+  geom_line(aes(y = avg7_case), color = "#307CA1", size = 2) +
+  geom_area(aes(y = avg7_case), fill = "#307CA1", alpha = 0.2) +
   
   geom_vline(xintercept = ca_first_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_second_vax_immunity, color = "black", linetype = "dashed") +
@@ -244,7 +245,7 @@ cases3 <-
            ymin = -Inf, ymax = Inf, 
            fill = "yellow", alpha = 0.3) + 
   
-  geom_col(fill = "#bcbcbc") +
+  geom_col(fill = "#D3AE7C") +
   #geom_line(aes(y = avg7_case), color = "blue", size = 2) +
   geom_vline(xintercept = ca_first_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_second_vax_immunity, color = "black", linetype = "dashed") +
@@ -309,8 +310,10 @@ death1 <-
            ymin = -Inf, ymax = Inf, 
            fill = "yellow", alpha = 0.3) + 
   
-  geom_col(fill = "#bcbcbc") +
-  geom_line(aes(y = avg7_death), color = "red", size = 2) +
+  geom_col(fill = "#D3AE7C") +
+  geom_line(aes(y = avg7_death), color = "#DA4511", size = 2) +
+  geom_area(aes(y = avg7_death), fill = "#DA4511", alpha = 0.2) +
+  
   geom_vline(xintercept = ca_first_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_second_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_lift_lockdown, color = "red", linetype = "dashed") +
@@ -351,8 +354,10 @@ death2 <-
            ymin = -Inf, ymax = Inf, 
            fill = "red", alpha = 0.2) +
   
-  geom_col(fill = "#bcbcbc") +
-  geom_line(aes(y = avg7_death), color = "red", size = 2) +
+  geom_col(fill = "#D3AE7C") +
+  geom_line(aes(y = avg7_death), color = "#DA4511", size = 2) +
+  geom_area(aes(y = avg7_death), fill = "#DA4511", alpha = 0.2) +
+  
   geom_vline(xintercept = ca_first_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_second_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_lift_lockdown, color = "red", linetype = "dashed") +
@@ -363,7 +368,7 @@ death2 <-
   scale_y_continuous(breaks = breaks_extended(n = 4), 
                      labels = label_comma(),
                      expand = c(0,0),
-                     sec_axis = dup_axis()) +
+                     sec.axis = dup_axis()) +
   
   labs(x = "", y = "",
        title = "Last 60 days in California", 
@@ -393,7 +398,7 @@ death3 <-
            ymin = -Inf, ymax = Inf, 
            fill = "red", alpha = 0.2) +
   
-  geom_col(fill = "#bcbcbc") +
+  geom_col(fill = "#D3AE7C") +
   #geom_line(aes(y = avg7_death), color = "red", size = 2) +
   geom_vline(xintercept = ca_first_vax_immunity, color = "black", linetype = "dashed") +
   geom_vline(xintercept = ca_second_vax_immunity, color = "black", linetype = "dashed") +
@@ -405,7 +410,7 @@ death3 <-
   scale_y_continuous(breaks = breaks_extended(n = 4), 
                      labels = label_comma(),
                      expand = c(0,0),
-                     sec_axis = dup_axis()) +
+                     sec.axis = dup_axis()) +
   
   labs(x = "", y = "",
        title = "Cummulative death toll in California", 
@@ -466,7 +471,7 @@ g1 <-
   #annotate("text", x = ca_lift_lockdown, y = 25000000, label = "Freedom") +
   #annotate("text", x = ca_lift_lockdown_plus, y = 35000000, label = "Freedom\n+14 days") +
   
-  geom_line(stat = "identity", color = "blue") +
+  geom_line(stat = "identity", color = "#307CA1") +
   geom_vline(xintercept = ca_lift_lockdown, color = "red", linetype = "dashed") +
   
   scale_x_date(date_breaks = "2 weeks", 
@@ -501,8 +506,8 @@ g2 <-
   annotate("text", x = ca_lift_lockdown_plus, y = 1700, label = "Freedom\n+14 days") +
   
   geom_col(fill = "#ababab") +
-  geom_line(aes(y = avg7_case), color = "blue", size = 1.2) +
-  geom_area(aes(y = avg7_case), fill = "blue", alpha = 0.3) +
+  geom_line(aes(y = avg7_case), color = "#307CA1", size = 1.2) +
+  geom_area(aes(y = avg7_case), fill = "#307CA1", alpha = 0.3) +
   geom_vline(xintercept = ca_lift_lockdown, color = "red", linetype = "dashed") +
   
   scale_x_date(date_breaks = "1 week", 
@@ -572,9 +577,9 @@ g4 <-
   annotate("text", x = ca_lift_lockdown_plus, y = 45, label = "14 days\nlater") +
   
   
-  geom_col(fill = "#bcbcbc") +
-  geom_line(aes(y = avg7_death), color = "red", size = 1.2) +
-  geom_area(aes(y = avg7_death), fill = "red", alpha = 0.4) +
+  geom_col(fill = "#D3AE7C") +
+  geom_line(aes(y = avg7_death), color = "#DA4511", size = 1.2) +
+  geom_area(aes(y = avg7_death), fill = "#DA4511", alpha = 0.4) +
   geom_vline(xintercept = ca_lift_lockdown, color = "red", linetype = "dashed") +
   
   scale_x_date(date_breaks = "1 week", 
